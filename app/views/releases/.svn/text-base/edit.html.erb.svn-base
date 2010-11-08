@@ -1,0 +1,7 @@
+<div class="detail-head">
+  <h1>Edit Release Projects</h1>
+</div>
+
+<div class="projects release-setup">
+  <%= render 'form' %>
+</div>

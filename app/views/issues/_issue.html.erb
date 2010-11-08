@@ -1,0 +1,5 @@
+<% if format_xml %>
+* [<%= get_mantis_resolution(issue.resolution) %>] "Issue <%= issue.id.to_s %>:":http://mantis.sologroup.com/view.php?id=<%= issue.id.to_s %> <%= issue.release_notes %>
+<% else %>
+<li>[<%= get_mantis_resolution(issue.resolution) %>] <a href="http://mantis.sologroup.com/view.php?id=<%= issue.id.to_s %>">Issue <%= issue.id.to_s %>:</a> <%= issue.release_notes %></li>
+<% end %>

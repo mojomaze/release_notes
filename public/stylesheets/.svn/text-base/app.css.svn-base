@@ -1,0 +1,459 @@
+body { background-color: #fff; color: #606060; margin: 10px; padding: 0; font-size:100%; }
+
+body, p, ol, ul, td {
+  font-family: verdana, arial, helvetica, sans-serif; padding: 0px;
+}
+
+/*  Error formatting */
+.field_with_errors {
+  padding: 2px !important;
+  background-color: #F0A8A8;
+  display: table;
+}
+
+#error_explanation {
+	border: 1px solid #990000;
+  	padding: 3px;
+  	padding-bottom: 0;
+  	margin-bottom: 10px;
+  	background-color: #F0A8A8;
+	-moz-border-radius: 5px 5px 5px 5px;
+	-webkit-border-radius: 5px 5px 5px 5px;
+	border-radius: 5px 5px 5px 5px;
+}
+
+#error_explanation h2 {
+  text-align: left;
+  font-weight: bold;
+  padding: 5px 5px 5px 15px;
+  /*font-size: 12px;*/
+  margin: -7px;
+  margin-bottom: 0px;
+  background-color: #c00;
+  color: #fff;
+}
+
+#error_explanation ul {
+	margin: 5px;
+}
+
+#error_explanation ul li {
+  font-size: .8125em;
+  list-style: none;
+  padding-left: 5px;
+}
+
+/* LOGIN PAGE*/
+div.login-form {
+	margin-left: auto;
+	margin-right: auto;
+	margin-top: 50px;
+	-moz-border-radius: 5px 5px 5px 5px;
+	-webkit-border-radius: 5px 5px 5px 5px;
+	border-radius: 5px 5px 5px 5px;
+	border: 10px solid #ccc;
+	background-color: #FAFFFA;
+	width: 400px;
+	padding: 10px;
+}
+
+.login-form h1 {
+	font-size: 1.25em;
+	text-align: center;
+	padding: 2px;
+	margin: 0px 0px 10px;
+}
+
+.login-form div {
+	font-size: .875em;
+	padding: 5px 5px 10px 10px;
+	text-align: left;
+}
+
+
+/*  top bar navigation */
+.nav-top {
+	font-size: .8125em;
+}
+
+.nav-top-right{
+	float: right;
+}
+
+.nav-bottom {
+	clear: both;
+}
+
+.nav-top .current a {
+	text-decoration: none;
+}
+
+/* LISTS */
+
+.releases-heading {
+	background-color: #B8E6B8;
+	border: 1px solid #B8E6B8;
+}
+
+.archives-heading {
+	background-color: #FFD0C8;
+	border: 1px solid #FFD0C8;
+}
+
+.users-heading {
+	background-color: #A2C0DA;
+	border: 1px solid #A2C0DA;
+}
+
+.list-heading {
+	width: 100%;
+	padding: 5px 0px 5px 0px;
+	margin-top: 10px;
+	-moz-border-radius: 5px 5px 0px 0px;
+	-webkit-border-radius: 5px 5px 0px 0px;
+	border-radius: 5px 5px 0px 0px;
+}
+
+.list-heading h1 {
+	font-size: 1em;
+	color: darkblue;
+	padding: 0px 0px 0px 10px;
+	margin: 2px 0px 3px 0px;
+}
+
+.action-section {
+	padding: 0px 0px 0px 10px;
+	font-size: .8125em;
+}
+
+.action-section-right {
+	float: right;
+	font-size: .8125em;
+	margin-right: 20px;
+	margin-top: -20px;	
+}
+
+.page-entries-info {
+	font-size: .780em;
+	padding: 10px 5px 5px 2px;
+}
+
+.action-section a {
+	text-decoration: none;
+	color: #606060;
+}
+
+/* Release Lists */
+.list-action-btn {
+	float: left;
+}
+
+.list-action-button {
+	cursor: pointer;
+	display: block;
+	border: 1px solid #ccc;
+	background-color: #eee;
+	float: left;
+	width: 60px;
+	height: 20px;
+	margin: 5px 0px 5px 0px;
+	padding-top: 1px;
+	text-align: center;
+}
+
+.list-action-button:hover {
+	background-color: darkblue;
+	color: #fff;
+}
+
+.left-round {
+	-moz-border-radius: 3px 0 0 3px;
+    -webkit-border-radius: 3px 0 0 3px;
+    border-radius: 3px 0 0 3px;
+    -khtml-border-radius: 3px 0 0 3px;
+}
+
+.no-round {
+	-moz-border-radius: 0;
+    -webkit-border-radius: 0;
+    border-radius: 0;
+    -khtml-border-radius: 0;
+}
+
+.right-round {
+	-moz-border-radius: 0px 3px 3px 0;
+    -webkit-border-radius: 0px 3px 3px 0;
+    border-radius: 0px 3px 3px 0;
+    -khtml-border-radius: 0px 3px 3px 0;
+}
+
+.gray-btn {
+    display: inline-block;
+    background: transparent url(../images/btn-gray.png) repeat-x 0 -4px;
+    border: 1px solid #ccc;
+    padding: 2px 6px 4px;
+    margin: 4px 0;
+    line-height: 16px;
+    cursor: pointer;
+    /*letter-spacing: -1px; /* Optional- Remove if you don't like it */
+}
+
+.gray-btn:hover {
+    background: transparent url(../images/btn-gray.png) repeat-x 0 -30px; /* Adjust this value accordingly, the lower it goes, the darker the hover state. Do not go past -80px */
+	border: 1px solid #848484;
+	color: #242424;
+}
+
+.gray-btn:active {
+    background: transparent url(../images/btn-gray.png) repeat-x 0 -120px; /* Adjust this value accordingly, the lower it goes, the lighter the pressed state. Do not go past -140px */
+    outline: none;
+	color: #242424;
+}
+
+
+#select_links {
+	clear: both;
+	cursor: default;
+	padding-left: 15px;
+	font-size: .688em;
+}
+
+span.list-action-slect {
+	cursor: pointer;
+}
+
+span.list-action-slect:hover {
+	font-style: bold;
+	color: darkblue;
+	text-decoration: underline;
+}
+
+.releases-items {
+	border: 1px solid #B8E6B8;
+}
+
+.archives-items {
+	border: 1px solid #FFD0C8;
+}
+
+.users-items {
+	border: 1px solid #A2C0DA;
+}
+
+.list-items {
+	width: 100%;
+	/*padding: 10px 0px 5px 8px;*/
+	-moz-border-radius: 0px 0px 5px 5px;
+	-webkit-border-radius: 0px 0px 5px 5px;
+	border-radius: 0px 0px 5px 5px;
+	font-size: .75em;
+}
+
+.list-items table {
+	width: 100%;
+	border-collapse: collapse;
+}
+
+.list-items table, .list-items th, .list-items td {
+	border: 1px solid #eee;
+	padding: 3px;
+}
+
+.releases-items th {
+	background-color: #EBFFEB;
+}
+
+.archives-items th {
+	background-color: #FFEFED;
+}
+
+.users-items th {
+	background-color: #DAE6F0;
+}
+
+.list-items th {
+	cursor: default;
+	text-align: left;
+}
+
+.list-items th.action-column {
+	width: 10px;
+}
+
+.list-items tr {
+	cursor: pointer;
+}
+
+.releases-items tr {
+	background-color: #FAFFFA;
+}
+
+.archives-items tr {
+	background-color: #FFFDFD;
+}
+
+.users-items tr {
+	background-color: #FAFAFF;
+}
+
+.list-items tr.over {
+	background-color: lightyellow !important;
+}
+
+.list-items td {
+	/*background-color: #FAFFFA;*/
+}
+
+/* Release Detail */
+.projects{
+	background-color:#B8E6B8;
+	-moz-border-radius: 10px;
+	-webkit-border-radius: 10px;
+	border-radius: 10px;
+}
+
+.detail-head h1{
+	font-size: 1em;
+	margin-left: 10px;
+}
+
+.archives {
+	background-color: #FFD0C8;
+}
+
+.projects .project{
+	float: left;
+	margin: 5px 20px 5px 20px;
+	padding: 2px;
+}
+
+.projects .project h1, .projects .project p{
+	font-size: .875em;
+	margin: 2px;
+	padding: 2px;
+}
+
+.projects .submit-version{
+	padding-left: 5px;
+}
+
+.projects .edit{
+	font-size: .75em;
+	float: left;
+	margin: 10px;
+	padding: 2px;
+}
+
+.projects .project-footer{
+	clear: both;
+}
+
+.release-setup{
+	padding: 20px 20px 0px 20px;
+}
+
+.release-setup .field {
+	margin-bottom: 10px;
+}
+
+.users{
+	background-color: #A2C0DA;
+	-moz-border-radius: 10px;
+	-webkit-border-radius: 10px;
+	border-radius: 10px;
+	padding: 20px 20px 0px 20px;
+}
+
+.users .field {
+	margin-bottom: 10px;
+}
+
+.version{
+	clear: both;
+}
+
+.main{
+	padding: 10px 5px 10px 5px;
+}
+
+.main h1{
+	font-size: .875em;
+}
+
+.message{
+	float: left;
+	width: 55%;
+	background: #eee;
+	padding: 10px 20px 0px 20px;
+	-moz-border-radius: 10px;
+	-webkit-border-radius: 10px;
+	border-radius: 10px;
+}
+
+.message h2{
+	font-size: .875em;
+}
+
+.message .message-header{
+	border-bottom: 1px solid #ddd;
+}
+
+.message .message-body p, .message .message-body ul{
+	font-size: .8125em;
+	line-height: 1.425em;
+	margin: 3px 0 16px;
+}
+
+.message .message-body h2{
+	font-size: .875em;
+}
+
+.message .message-body ul{
+	padding-left: 30px;
+}
+
+.message .message-body li{
+	list-style: square;
+}
+
+.notify{
+	float: right;
+	width: 35%;
+	padding: 10px 20px 20px 20px;
+	border: 1px solid #8FBC8F;
+	-moz-border-radius: 10px;
+	-webkit-border-radius: 10px;
+	border-radius: 10px;
+}
+
+.notify-group{
+	clear: both;
+}
+
+.notify-group h2{
+	font-size: .8125em;
+	margin: 2px;
+	padding: 2px;
+	color: #707070;
+}
+
+.notify-group p{
+	font-size: .75em;
+	margin-left: 10px;
+}
+
+.notify .category{
+	font-size: .75em;
+}
+
+.notify .person{
+	float: left;
+	font-size: .75em;
+	margin: 2px;
+}
+
+.actions{
+	clear: both;
+	padding: 20px;
+	font-size: .875em;
+}

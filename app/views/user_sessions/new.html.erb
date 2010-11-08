@@ -1,0 +1,29 @@
+<div class="login-form">
+  <h1>Release Notes</h1>
+  <form id="new_user_session" class="new_user_session" method="post" action="/user_sessions">
+    <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>" />
+  <%= fields_for(@user_session) do |f| %>
+    <% if @user_session.errors.any? %>
+      <div id="error_explanation">
+        <ul>
+        <% @user_session.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+        </ul>
+      </div>
+    <% end %>
+
+    <div>
+      Username<br />
+      <%= f.text_field :username %>
+    </div>
+    <div>
+      Password<br />
+      <%= f.password_field :password %>
+    </div>
+    <div>
+      <%= f.submit 'Sign In' %>
+    </div>
+  <% end %>
+  </form>
+</div>

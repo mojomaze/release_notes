@@ -1,0 +1,31 @@
+<% content_for :head do %>
+  <%= javascript_include_tag "app/users/list.js" %>
+<% end %>
+
+<div class="list-heading users-heading">
+  <h1>Users</h1>
+  <%= render "list_actions" %>
+</div>
+
+<div class="list-items users-items">
+  <%= form_tag list_action_users_path, :method => :post, :remote => false, :id => "user_list_form" do %>
+    <%= hidden_field_tag 'action_type' %>
+    <table>
+      <tr>
+        <th class="action-column">&nbsp;</th>
+        <th>Username</th>
+        <th>Email</th>
+        <th>Updated</th>
+      </tr>
+
+    <% @users.each do |user| %>
+      <tr id="<%= user.id %>" class="list-record">
+        <td><%= check_box_tag 'action_id[]', user.id, false %>
+        <td class="users-edit"><%= user.username %></td>
+        <td class="users-edit"><%= user.email %></td>
+        <td class="users-edit"><%= user.updated_at.strftime("%m/%d/%y") %></td>
+      </tr>
+    <% end %>
+    </table>
+  <% end %>
+</div>

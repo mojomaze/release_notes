@@ -1,0 +1,38 @@
+<% if format_xml %>
+<request>
+<post>
+<category-id><%= release.basecamp_message_category_id if release.basecamp_message_category_id %></category-id>
+<title><%= "#{@release.mantis_project_name} v#{@release.mantis_project_version_name} Deployed" %></title>
+<use-textile type="boolean">true</use-textile>
+<body>
+We have deployed to production version <%= release.mantis_project_version_name %> of the <%= release.mantis_project_name %>.  The changelog is here:
+
+http://mantis.sologroup.com/changelog_page.php?version_id=<%= release.mantis_project_version_id.to_s %>
+
+h2. Release Notes:
+
+<%= render :partial => 'issues/issue', :collection => @issues, :locals => { :format_xml => format_xml} %>
+
+Thanks.</body>
+</post>
+    <% if @notify %>
+      <% @notify.each do |n| %>
+<notify><%= n.to_s %></notify>
+      <% end %>
+    <% end %>
+</request>
+
+<% else %>
+  <div class="message-header">
+    <h2><%= "#{@release.mantis_project_name} v#{@release.mantis_project_version_name} Deployed" %></h2>
+  </div>
+  <div class="message-body">
+    <p>We have deployed to production version <%= release.mantis_project_version_name %> of the <%= release.mantis_project_name %>.  The changelog is here:</p>
+    <p><a href="http://mantis.sologroup.com/changelog_page.php?version_id=<%= release.mantis_project_version_id.to_s %>">http://mantis.sologroup.com/changelog_page.php?version_id=<%= release.mantis_project_version_id.to_s %></a></p>
+    <h2>Release Notes:</h2>
+    <ul>
+      <%= render :partial => 'issues/issue', :collection => @issues, :locals => { :format_xml => format_xml } %>
+    </ul>
+    <p>Thanks.</p>
+  </div>
+<% end %>

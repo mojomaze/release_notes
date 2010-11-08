@@ -1,0 +1,7 @@
+<div class="detail-head">
+  <h1>New user</h1>
+</div>
+
+<div class="users">
+  <%= render 'form' %>
+</div>

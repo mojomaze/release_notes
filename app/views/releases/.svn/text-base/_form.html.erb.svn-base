@@ -1,0 +1,31 @@
+<%= form_for(@release) do |f| %>
+  <% if @release.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@release.errors.count, "error") %> prohibited this release from being saved:</h2>
+
+      <ul>
+      <% @release.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+  
+  <div class="field">
+    Mantis Project:<br />
+    <%= select("release", "mantis_project_id", @mantis_list, {:include_blank => true}) %>
+  </div>
+  
+  <div class="field">
+    Basecamp Project:<br />
+    <%= select("release", "basecamp_project_id", @project_list, {:include_blank => true}) %>
+  </div>
+
+  <div class="actions">
+    <%= f.submit %> or 
+    <%
+     tmp_cancel = @release.new_record? ? releases_path : @release
+    %>
+    <%= link_to 'Cancel', tmp_cancel %>
+  </div>
+<% end %>

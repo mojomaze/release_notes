@@ -1,0 +1,11 @@
+<%= form_tag(user_preferences_update_path, :method => "post") do %> 
+  <h3>Basecamp</h3>
+  <div class="field">
+    <%= label_tag 'preferences[basecamp_authkey]', "Basecamp Auth Key:" %>
+    <%= text_field_tag 'preferences[basecamp_authkey]', @preferences.basecamp_authkey, :size => 40 %>
+  </div>
+  
+  <div class="actions">
+    <%= submit_tag("Update Preferences") %> or <%= link_to 'Back', :back %>
+  </div>
+<% end %>

@@ -1,0 +1,27 @@
+<div id="action_search" class="action-section-right">
+  <%= form_tag releases_path, :method => :get, :remote => false do %>
+    <span>
+      <%= text_field_tag :search, params[:search] %>
+    </span>
+    <span>
+      <%= submit_tag "Search", :name => nil %>
+    </span>
+    <span>
+      <%= link_to 'All', releases_path %>
+    </span>
+  <% end %>
+  <div class="page-entries-info"><%= page_entries_info @releases %></div>
+</div>
+
+<div id="action_links" class="action-section">
+  <%= link_to 'Create', new_release_path, :class => "list-action-btn gray-btn left-round" %>
+  <span id="action_archive" class="list-action-btn gray-btn no-round">Archive</span>
+  <span id="action_delete" class="list-action-btn gray-btn right-round">Delete</span>
+</div>
+
+<div id="select_links" class="action-section">
+  <span>Select: <span id="action_select_all" class="list-action-slect">All</span>, 
+  <span id="action_select_none" class="list-action-slect">None</span>, 
+  <span id="action_select_released" class="list-action-slect">Released</span>, 
+  <span id="action_select_unreleased" class="list-action-slect">Unreleased</span></span>
+</div>

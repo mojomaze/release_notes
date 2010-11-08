@@ -1,0 +1,62 @@
+<p id="notice"><%= notice %></p>
+
+<%= form_for(@release) do |f| %>
+  <% if @release.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@release.errors.count, "error") %> prohibited this release from being saved:</h2>
+
+      <ul>
+      <% @release.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+  
+  <div class="detail-head">
+    <h1>Release Detail: ID <%= @release.id %></h1>
+  </div>
+  
+  <div class="archives projects">  
+    <div class="project">
+      <h1>Mantis Project</h1>
+      <p><%= @release.mantis_project_name %></p>
+      <p>version: 
+        <% if @version_released %>
+          <%= "#{@release.mantis_project_version_name} (released #{@version_release_date})" %>
+        <% else %>
+          <%= @release.mantis_project_version_name %>
+        <% end %>
+      </p>
+    </div>
+  
+    <div class="project">
+      -->
+    </div>
+  
+    <div class="project">
+      <h1>Basecamp Project</h1>
+      <p><%= @release.basecamp_project_name %></p>
+    </div>
+    
+    <div class="edit">
+      <%= link_to 'Activate', unarchive_archive_path(@release) %>
+    </div>
+  
+    <div class="project-footer"></div>
+  </div>
+  
+  <div class="main">
+    <div class="message">
+      <% if !@release.mantis_project_version_id %>
+        <p>Select mantis project version</p>
+      <% else %>
+          <h1>Message:</h1>
+          <%= render :partial => "releases/release", :object => @release, :locals => { :format_xml => false } %>
+      <% end %>
+    </div>
+    <div class="actions">
+      <%= link_to 'Back', archives_path %>
+    </div>
+  </div>
+<% end %>

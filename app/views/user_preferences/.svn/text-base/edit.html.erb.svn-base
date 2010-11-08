@@ -1,0 +1,9 @@
+<p id="notice" class="error-msg"><%= notice %></p>
+
+<div class="detail-head">
+  <h1>Edit Preferences</h1>
+</div>
+
+<div class="users">
+  <%= render 'form' %>
+</div>

@@ -1,0 +1,40 @@
+<% content_for :head do %>
+  <%= javascript_include_tag "app/releases/list.js" %>
+<% end %>
+
+<div class="list-heading releases-heading">
+  <h1>Releases</h1>
+  <%= render "list_actions" %>
+</div>
+
+<div class="list-items releases-items">
+  <%= form_tag list_action_releases_path, :method => :post, :remote => false, :id => "release_list_form" do %>
+    <%= hidden_field_tag 'action_type' %>
+    <table>
+      <tr>
+        <th class="action-column">&nbsp;</th>
+        <th>Mantis Project</th>
+        <th>Version</th>
+        <th>Basecamp Project</th>
+        <th>Released</th>
+        <th>User</th>
+        <th>Updated</th>
+      </tr>
+
+    <% @releases.each do |release| %>
+      <% check_class = release.released? ? 'released' : 'unreleased' %>
+      <tr id="<%= release.id %>" class="list-record">
+        <td><%= check_box_tag 'action_id[]', release.id, false, :class => check_class %>
+        <td class="releases-edit"><%= release.mantis_project_name %></td>
+        <td class="releases-edit"><%= release.mantis_project_version_name %></td>
+        <td class="releases-edit"><%= release.basecamp_project_name %></td>
+        <td class="releases-edit"><%= release.released? ? 'X' : '' %></td>
+        <td class="releases-edit"><%= release.user.username if release.user %></td>
+        <td class="releases-edit"><%= release.updated_at.strftime("%m/%d/%y") %></td>
+      </tr>
+    <% end %>
+    </table>
+  <% end %>
+</div>
+
+<%= will_paginate @releases %>
