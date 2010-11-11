@@ -140,9 +140,14 @@ class ReleasesController < ApplicationController
     # send parameter true to rollback release
     version = MantisProjectVersionTable.find_by_id(@release.mantis_project_version_id)
     if version && version.release_version(true)
-      if ProjectConnect.delete_message(current_user.prefs.basecamp_authkey, @release.basecamp_message_id)
-        @release.basecamp_message_id = nil
-        @release.save
+      if @release.basecamp_message_id 
+        conn = basecamp_connect
+        if Basecamp::Message.delete( conn, @release.basecamp_message_id )
+          @release.basecamp_message_id = nil
+          @release.save
+          result = true
+        end
+      else
         result = true
       end
     end

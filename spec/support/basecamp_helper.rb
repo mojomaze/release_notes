@@ -25,3 +25,11 @@ end
 def basecamp_project
   4904001
 end
+
+def basecamp_message_category
+  49620029
+end
+
+def mantis_project
+  21
+end

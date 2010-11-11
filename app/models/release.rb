@@ -50,7 +50,8 @@ class Release < ActiveRecord::Base
         MantisProjectVersionTable.transaction do
           version = MantisProjectVersionTable.find_by_id(self.mantis_project_version_id)
           if version.release_version
-            message = ProjectConnect.create_message(current_user.prefs.basecamp_authkey, self.basecamp_project_id, body)
+            conn = basecamp_connect
+            message = Basecamp::Message.create(conn, self.basecamp_project_id, body)
             if message
               self.basecamp_message_id = message.to_i
               self.save
@@ -100,9 +101,7 @@ class Release < ActiveRecord::Base
   
   private
     def basecamp_connect
-      if current_user.prefs.basecamp_authkey
-        Basecamp.establish_connection!('sologroupinc.basecamphq.com', current_user.prefs.basecamp_authkey, 'X', false)
-      end
+      connection = Basecamp::Connect.new(current_user.prefs[:basecamp_url], current_user.prefs[:basecamp_authkey])
     end
   
     def current_user_session
