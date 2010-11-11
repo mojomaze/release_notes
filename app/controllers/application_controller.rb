@@ -1,5 +1,5 @@
 class ApplicationController < ActionController::Base
- before_filter :authorize
+  before_filter :authorize
   
   protect_from_forgery
   layout 'application'
@@ -7,27 +7,16 @@ class ApplicationController < ActionController::Base
   helper_method :current_user
   
   def basecamp_connect
-    if current_user.prefs.basecamp_authkey
-      Basecamp.establish_connection!('sologroupinc.basecamphq.com', current_user.prefs.basecamp_authkey, 'X', false)
-    end
+    connection = Basecamp::Connect.new(current_user.prefs[:basecamp_url], current_user.prefs[:basecamp_authkey])
   end
   
   protected
-    # copied over from aidu-id - maybe useful later on
-    # def admin_only
-    #       # all logged in users are admin for now
-    #       unless current_user
-    #         redirect_to root_url
-    #       end
-    #     end
-    
     def authorize
       unless current_user
         redirect_to root_url
       end
     end
     
-  
   private
     def current_user_session
       return @current_user_session if defined?(@current_user_session)

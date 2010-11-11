@@ -1,10 +1,9 @@
+require 'basecamp'
+
 class ReleasesController < ApplicationController
   SGI_COMPANY_ID = 247860
   
-  # GET /releases
-  # GET /releases.xml
   def index
-    
     params[:page] ||= 1
         
     @releases = Release.search(params[:search], params[:page])
@@ -15,8 +14,6 @@ class ReleasesController < ApplicationController
     end
   end
 
-  # GET /releases/1
-  # GET /releases/1.xml
   def show
     @release = Release.find(params[:id])
     
@@ -33,13 +30,11 @@ class ReleasesController < ApplicationController
     
     #basecamp info
     begin
-      basecamp_connect
-      @categories = Basecamp::Category.post_categories(@release.basecamp_project_id).collect{|c| [ c.name, c.id ] }
-      @basecamp = Basecamp.new
-      @sgi = @basecamp.people(SGI_COMPANY_ID, @release.basecamp_project_id)
-      @people = @basecamp.people(@release.basecamp_company_id, @release.basecamp_project_id) if @release.basecamp_company_id != SGI_COMPANY_ID
+      conn = basecamp_connect
+      @categories = Basecamp::Category.find_by_project(conn, @release.basecamp_project_id).collect{|c| [ c.name, c.id ] }
+      @people = Basecamp::Person.find_by_project(conn, @release.basecamp_project_id)
     rescue Exception => err
-      redirect_to(user_preferences_edit_path, :notice => "Could not connect to basecamp: #{err}") and return
+      redirect_to(user_preferences_edit_path, :notice => "Basecamp Error: #{err}") and return
     end
     
     @version_released = @release.released?
@@ -51,15 +46,13 @@ class ReleasesController < ApplicationController
     end
   end
 
-  # GET /releases/new
-  # GET /releases/new.xml
   def new
     @release = Release.new
     # protected controller method
     begin
       build_project_lists
     rescue Exception => err
-      redirect_to(user_preferences_edit_path, :notice => "Could not connect to basecamp: #{err}") and return
+      redirect_to(user_preferences_edit_path, :notice => "Basecamp Error: #{err}") and return
     end
     
     respond_to do |format|
@@ -68,19 +61,16 @@ class ReleasesController < ApplicationController
     end
   end
 
-  # GET /releases/1/edit
   def edit
     @release = Release.find(params[:id])
     # protected controller method
     begin
       build_project_lists
     rescue Exception => err
-      redirect_to(user_preferences_edit_path, :notice => "Could not connect to basecamp: #{err}") and return
+      redirect_to(user_preferences_edit_path, :notice => "Basecamp Error: #{err}") and return
     end
   end
 
-  # POST /releases
-  # POST /releases.xml
   def create
     @release = Release.new(params[:release])
 
@@ -93,7 +83,7 @@ class ReleasesController < ApplicationController
         begin
           build_project_lists
         rescue Exception => err
-          redirect_to(user_preferences_edit_path, :notice => "Could not connect to basecamp: #{err}") and return
+          redirect_to(user_preferences_edit_path, :notice => "Basecamp Error: #{err}") and return
         end
         format.html { render :action => "new" }
         format.xml  { render :xml => @release.errors, :status => :unprocessable_entity }
@@ -101,8 +91,6 @@ class ReleasesController < ApplicationController
     end
   end
 
-  # PUT /releases/1
-  # PUT /releases/1.xml
   def update
     @release = Release.find(params[:id])
     # add the user's id
@@ -136,8 +124,6 @@ class ReleasesController < ApplicationController
     end
   end
 
-  # DELETE /releases/1
-  # DELETE /releases/1.xml
   def destroy
     @release = Release.find(params[:id])
     @release.destroy
@@ -169,7 +155,6 @@ class ReleasesController < ApplicationController
     end 
   end
   
-  # GET /archives/1/unarchive
   def archive
     @release = Release.find(params[:id])
 
@@ -206,14 +191,12 @@ class ReleasesController < ApplicationController
   # get basecamp and mantis project names
   def build_project_lists
     # call the application controller connect funtion
-    basecamp_connect
-    projects = [ ]
-    all_projects = Basecamp::Project.find(:all)
-    all_projects.each do |project|
-      projects << [project.name, project.id] if project.status == 'active'
+    conn = basecamp_connect
+    unless conn 
+      raise "url or authkey not set"
     end
-    @project_list = projects.sort_by{|name, value| name}
-    
+    projects = Basecamp::Project.find_by_status(conn, 'active')
+    @project_list = projects.collect{|p| [p.name, p.id] }.sort_by{|name, id| name }
     @mantis_list = MantisProjectTable.order("name").all.collect{|p| [ p.name, p.id ] }
   end
 end

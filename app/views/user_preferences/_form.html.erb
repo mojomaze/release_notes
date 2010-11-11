@@ -1,8 +1,13 @@
 <%= form_tag(user_preferences_update_path, :method => "post") do %> 
   <h3>Basecamp</h3>
   <div class="field">
+    <%= label_tag 'preferences[basecamp_authkey]', "Basecamp URL:" %>
+    <%= text_field_tag 'preferences[basecamp_url]', @preferences[:basecamp_url], :size => 40 %>
+  </div>
+  
+  <div>
     <%= label_tag 'preferences[basecamp_authkey]', "Basecamp Auth Key:" %>
-    <%= text_field_tag 'preferences[basecamp_authkey]', @preferences.basecamp_authkey, :size => 40 %>
+    <%= text_field_tag 'preferences[basecamp_authkey]', @preferences[:basecamp_authkey], :size => 40 %>
   </div>
   
   <div class="actions">

@@ -70,15 +70,9 @@
         </div>
     
         <div class="notify-group">
-          <h2>Client:</h2>
+          <h2></h2>
           <%= render :partial => 'person', :collection => @people %>
           <% if !@people %><p>None</p><% end %>
-        </div>
-    
-        <div class="notify-group">
-          <h2>SGI:</h2>  
-          <%= render :partial => 'person', :collection => @sgi %>
-          <% if !@sgi %><p>None</p><% end %>
         </div>
       </div>
       <div class="actions">

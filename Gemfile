@@ -1,6 +1,7 @@
 source 'http://rubygems.org'
+source 'http://rubyforge.org'
 
-gem 'rails', '3.0.0.beta4'
+gem 'rails', '3.0.0'
 
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
@@ -29,14 +30,14 @@ gem 'ruby-debug19', :require => 'ruby-debug'
 gem "will_paginate", "~> 3.0.pre2"
 
 
-# Bundle the extra gems:
-# gem 'bj'
-# gem 'nokogiri', '1.4.1'
-# gem 'sqlite3-ruby', :require => 'sqlite3'
-# gem 'aws-s3', :require => 'aws/s3'
-
-# Bundle gems for certain environments:
-# gem 'rspec', :group => :test
-# group :test do
-#   gem 'webrat'
-# end
+group :development, :test do
+	gem "rspec", ">= 2.0.0.beta.22" 
+	gem "rspec-rails" , ">= 2.0.0.beta.19"
+	gem "cucumber-rails" , ">= 0.3.2"
+	gem "webrat" , ">= 0.7.2.beta.1"
+	gem "database_cleaner" , ">= 0.5.2"
+	gem "selenium-client" , ">= 1.2.18"
+	gem "launchy"
+	gem 'machinist', '>= 2.0.0.beta1'
+	gem 'faker'
+end
