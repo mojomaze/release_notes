@@ -73,8 +73,8 @@ class Release < ActiveRecord::Base
   protected
   def set_project_names
     if basecamp_project_id_changed?
-      basecamp_connect
-      project = Basecamp::Project.find(basecamp_project_id)
+      conn = basecamp_connect
+      project = Basecamp::Project.find(conn, basecamp_project_id)
       if project
         self.basecamp_project_name = project.name 
         self.basecamp_company_id = project.company.id

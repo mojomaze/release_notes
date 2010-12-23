@@ -30,5 +30,16 @@ module Basecamp
         end
       end
     end
+    
+    describe "Self.find" do
+      it "should return a basecamp project with valid project id" do
+        project = Basecamp::Project.find(conn, basecamp_project)
+        project.id.should_not be_nil
+        project.name.should_not be_nil
+        project.status.should_not be_nil
+        project.company.should_not be_nil
+      end
+    end
+    
   end
 end

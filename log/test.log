@@ -396,3 +396,20 @@ Completed 200 OK in 27ms (Views: 5.2ms | ActiveRecord: 0.5ms)
   Processing by ReleasesController#new as HTML
   [1m[36mMantisProjectTable Load (1593.3ms)[0m  [1mSELECT `mantis_project_table`.* FROM `mantis_project_table` ORDER BY name[0m
 Completed 200 OK in 3176ms (Views: 2.3ms | ActiveRecord: 1593.3ms)
+DEPRECATION WARNING: You are using the old router DSL which will be removed in Rails 3.1. Please check how to update your routes file at: http://www.engineyard.com/blog/2010/the-lowdown-on-routes-in-rails-3/. (called from <top (required)> at /Users/mwinkler/Projects/SGI/1000/release_notes/config/routes.rb:1)
+  Processing by ReleasesController#index as HTML
+Redirected to http://test.host/
+Completed 302 Found in 1ms
+  Processing by ReleasesController#index as HTML
+  [1m[36mRelease Load (0.3ms)[0m  [1mSELECT "releases".* FROM "releases" WHERE (archived = 'f') LIMIT 30 OFFSET 0[0m
+Completed 200 OK in 24ms (Views: 5.1ms | ActiveRecord: 0.3ms)
+  Processing by ReleasesController#new as HTML
+  [1m[35mMantisProjectTable Load (116.6ms)[0m  SELECT `mantis_project_table`.* FROM `mantis_project_table` ORDER BY name
+Completed 200 OK in 1729ms (Views: 51.4ms | ActiveRecord: 116.6ms)
+DEPRECATION WARNING: You are using the old router DSL which will be removed in Rails 3.1. Please check how to update your routes file at: http://www.engineyard.com/blog/2010/the-lowdown-on-routes-in-rails-3/. (called from <top (required)> at /Users/mwinkler/Projects/SGI/1000/release_notes/config/routes.rb:1)
+DEPRECATION WARNING: You are using the old router DSL which will be removed in Rails 3.1. Please check how to update your routes file at: http://www.engineyard.com/blog/2010/the-lowdown-on-routes-in-rails-3/. (called from <top (required)> at /Users/mwinkler/Projects/SGI/1000/release_notes/config/routes.rb:1)
+DEPRECATION WARNING: You are using the old router DSL which will be removed in Rails 3.1. Please check how to update your routes file at: http://www.engineyard.com/blog/2010/the-lowdown-on-routes-in-rails-3/. (called from <top (required)> at /Users/mwinkler/Projects/SGI/1000/release_notes/config/routes.rb:1)
+DEPRECATION WARNING: You are using the old router DSL which will be removed in Rails 3.1. Please check how to update your routes file at: http://www.engineyard.com/blog/2010/the-lowdown-on-routes-in-rails-3/. (called from <top (required)> at /Users/mwinkler/Projects/SGI/1000/release_notes/config/routes.rb:1)
+DEPRECATION WARNING: You are using the old router DSL which will be removed in Rails 3.1. Please check how to update your routes file at: http://www.engineyard.com/blog/2010/the-lowdown-on-routes-in-rails-3/. (called from <top (required)> at /Users/mwinkler/Projects/SGI/1000/release_notes/config/routes.rb:1)
+DEPRECATION WARNING: You are using the old router DSL which will be removed in Rails 3.1. Please check how to update your routes file at: http://www.engineyard.com/blog/2010/the-lowdown-on-routes-in-rails-3/. (called from <top (required)> at /Users/mwinkler/Projects/SGI/1000/release_notes/config/routes.rb:1)
+DEPRECATION WARNING: You are using the old router DSL which will be removed in Rails 3.1. Please check how to update your routes file at: http://www.engineyard.com/blog/2010/the-lowdown-on-routes-in-rails-3/. (called from <top (required)> at /Users/mwinkler/Projects/SGI/1000/release_notes/config/routes.rb:1)

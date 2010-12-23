@@ -29,6 +29,18 @@ module Basecamp
       return projects
     end
     
+    def self.find(conn, project_id)
+      begin
+        response = conn.create_request("GET","/projects/#{project_id}.xml")
+        doc = Hpricot(response.body)
+        elem = doc.at(:project)
+        project = Basecamp::Project.new({:xml => elem}) if elem
+        return project
+      rescue => e
+        raise e
+      end
+    end
+    
     private
       def self.handle_request(conn)
         begin
