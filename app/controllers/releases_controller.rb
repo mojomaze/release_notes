@@ -38,7 +38,7 @@ class ReleasesController < ApplicationController
     end
     
     @version_released = @release.released?
-    @version_release_date = @release.release_date.strftime("%Y-%m-%d") if @version_released && @release.release_date
+    @version_release_date = Time.at(@release.release_date).strftime("%Y-%m-%d") if @version_released && @release.release_date
     
     respond_to do |format|
       format.html # show.html.erb

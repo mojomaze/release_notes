@@ -11,7 +11,7 @@ class MantisProjectVersionTable < ActiveRecord::Base
   def release_version(undo = nil)
     code = undo ? 0 : 1
     self.released = code
-    self.date_order = Date.today
+    self.date_order = Time.now.to_i
     if self.save
       return true
     end
