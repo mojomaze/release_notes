@@ -10,30 +10,43 @@ namespace :deploy do
   end
 end
 
-set :application, ""
-set :repository,  "git@github.com:mojomaze/release_notes.git"
+
+# miscellaneous options
 set :scm, :git
 # Or: `accurev`, `bzr`, `cvs`, `darcs`, `git`, `mercurial`, `perforce`, `subversion` or `none`
-
-role :web, "your web-server here"                          # Your HTTP server, Apache/etc
-role :app, "your app-server here"                          # This may be the same as your `Web` server
-role :db,  "your primary db-server here", :primary => true # This is where Rails migrations will run
-role :db,  "your slave db-server here"
-
-
+set :deploy_via, :remote_cache
+# set :branch, "master"         # For newer versions of git
+set :branch, "origin/master"    # For older versions of git
+set :scm_verbose, true
+set :use_sudo, false
 default_run_options[:pty] = true  # Must be set for the password prompt from git to work
+
+
+# be sure to change these
+set :user, 'techserv'
+set :application, 'release_notes'
 set :user, "techserv"  # The server's user for deploys
 set :scm_passphrase, "qbf_j0ld"  # The deploy user's password
 
-set :deploy_via, :remote_cache
+set :repository,  "git@github.com:mojomaze/release_notes.git"
 
-# set :branch, "master"         # For newer versions of git
-set :branch, "origin/master"    # For older versions of git
+
+desc "Local staging server code name: lenny"
+task :staging do
+  set :repository,  "git@github.com:mojomaze/release_notes.git"
+  set :domain, "lenny.sologroup.com"
+  role :app, domain
+  role :web, domain
+  role :db, domain, :primary => true
+  set :deploy_to, "/Users/Shared/SGI/#{application}"
+  set :rails_env, 'staging'
+end
+
 
 desc "The production server, running live"
 task :production do
   set :repository,  "git@github.com:mojomaze/release_notes.git"
-  set :domain, 'hlcom.sologroup.com'
+  set :domain, "#{application}.sologroup.com"
   role :app, domain
   role :web, domain
   role :db, domain, :primary => true
@@ -43,6 +56,12 @@ task :production do
   before "deploy:update", "deploy:reset_cache"
 end
 
+
+
+# role :web, "your web-server here"                          # Your HTTP server, Apache/etc
+# role :app, "your app-server here"                          # This may be the same as your `Web` server
+# role :db,  "your primary db-server here", :primary => true # This is where Rails migrations will run
+# role :db,  "your slave db-server here"
 
 
 # if you're still using the script/reaper helper you will need
