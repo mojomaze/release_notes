@@ -15,11 +15,23 @@ end
 set :scm, :git
 # Or: `accurev`, `bzr`, `cvs`, `darcs`, `git`, `mercurial`, `perforce`, `subversion` or `none`
 set :deploy_via, :remote_cache
-# set :branch, "master"         # For newer versions of git
-set :branch, "origin/master"    # For older versions of git
+set :branch, "master"         # For newer versions of git
+# set :branch, "origin/master"    # For older versions of git
 set :scm_verbose, true
 set :use_sudo, false
+
+# you might need to set this if you aren't seeing password prompts
 default_run_options[:pty] = true  # Must be set for the password prompt from git to work
+
+# As Capistrano executes in a non-interactive mode and therefore doesn't cause
+# any of your shell profile scripts to be run, the following might be needed
+# if (for example) you have locally installed gems or applications. Note:
+# this needs to contain the full values for the variables set, not simply
+# the deltas.
+# default_environment['PATH']='<your paths>:/usr/local/bin:/usr/bin:/bin'
+default_environment['PATH']='/opt/local/bin:/opt/local/sbin:/usr/local/mysql/bin:/opt/subversion/bin:/opt/local/apache2/bin:/usr/local/bin:/usr/local/sbin:/usr/bin:/usr/sbin:/bin:/sbin'
+# default_environment['GEM_PATH']='<your paths>:/usr/lib/ruby/gems/1.8'
+
 
 
 # be sure to change these
@@ -29,6 +41,7 @@ set :user, "techserv"  # The server's user for deploys
 set :scm_passphrase, "qbf_j0ld"  # The deploy user's password
 
 set :repository,  "git@github.com:mojomaze/release_notes.git"
+ssh_options[:forward_agent] = true  # Use my private keys in order to pull from git
 
 
 desc "Local staging server code name: lenny"
@@ -43,17 +56,17 @@ task :staging do
 end
 
 
-desc "The production server, running live"
+desc "The production server, code name: leonard"
 task :production do
   set :repository,  "git@github.com:mojomaze/release_notes.git"
-  set :domain, "#{application}.sologroup.com"
+  set :domain, "lenny.sologroup.com"
   role :app, domain
   role :web, domain
   role :db, domain, :primary => true
   set :deploy_to, "/Users/Shared/SGI/#{application}"
   set :rails_env, 'production'
   # If we are deploying, the cache will be reset and it will always pull down a fresh copy.
-  before "deploy:update", "deploy:reset_cache"
+  # before "deploy:update", "deploy:reset_cache"
 end
 
 
