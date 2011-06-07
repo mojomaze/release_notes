@@ -6,7 +6,7 @@ development:
   pool: 5
   timeout: 5000
   
-mantis:  
+mantis:
   adapter: mysql
   encoding: utf8
   database: mantis

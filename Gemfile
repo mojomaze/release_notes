@@ -24,7 +24,7 @@ gem 'authlogic'
 
 # To use debugger
 # gem 'ruby-debug'
-gem 'ruby-debug19', :require => 'ruby-debug'
+# gem 'ruby-debug19', :require => 'ruby-debug'
 
 # controller pagination
 gem "will_paginate", "~> 3.0.pre2"
