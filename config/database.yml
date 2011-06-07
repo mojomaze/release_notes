@@ -7,14 +7,14 @@ development:
   timeout: 5000
   
 mantis:  
-    adapter: mysql
-    encoding: utf8
-    database: mantis
-    username: mwinkler
-    password: hedger
-    host: sanjay.sologroup.com
-    connect_timeout: 10
-    socket: /tmp/mysql.sock
+  adapter: mysql
+  encoding: utf8
+  database: mantis
+  username: mwinkler
+  password: hedger
+  host: sanjay.sologroup.com
+  connect_timeout: 10
+  socket: /tmp/mysql.sock
 
 # Warning: The database defined as "test" will be erased and
 # re-generated from your development database when you run "rake".
