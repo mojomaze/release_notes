@@ -15,7 +15,7 @@ end
 set :scm, :git
 # Or: `accurev`, `bzr`, `cvs`, `darcs`, `git`, `mercurial`, `perforce`, `subversion` or `none`
 set :deploy_via, :remote_cache
-set :branch, "master"         # For newer versions of git
+set :branch, "master"             # For newer versions of git
 # set :branch, "origin/master"    # For older versions of git
 set :scm_verbose, true
 set :use_sudo, false
@@ -38,7 +38,7 @@ default_environment['PATH']='/opt/local/bin:/opt/local/sbin:/usr/local/mysql/bin
 set :user, 'techserv'
 set :application, 'release_notes'
 set :user, "techserv"  # The server's user for deploys
-set :scm_passphrase, "qbf_j0ld"  # The deploy user's password
+# set :scm_passphrase, ""  # The deploy user's password
 
 set :repository,  "git@github.com:mojomaze/release_notes.git"
 ssh_options[:forward_agent] = true  # Use my private keys in order to pull from git
@@ -46,6 +46,13 @@ ssh_options[:forward_agent] = true  # Use my private keys in order to pull from 
 
 desc "Local staging server code name: lenny"
 task :staging do
+  # RVM bootstrap, needed since this box is running rvm.  
+  $:.unshift(File.expand_path('./lib', ENV['rvm_path']))  # Add RVM's lib directory to the load path.
+  require 'rvm/capistrano'                                # Load RVM's capistrano plugin.
+  require "bundler/capistrano"
+  set :rvm_ruby_string, 'ruby-1.9.2-p290@aidu'             # Whatever env you want it to run in.
+  # set :rvm_type, :user                                  # Set the user for rvm, or comment out if system install
+  
   set :repository,  "git@github.com:mojomaze/release_notes.git"
   set :domain, "lenny.sologroup.com"
   role :app, domain
@@ -58,6 +65,13 @@ end
 
 desc "The production server, code name: leonard"
 task :production do
+  # RVM bootstrap, needed since this box is running rvm.  
+  $:.unshift(File.expand_path('./lib', ENV['rvm_path']))  # Add RVM's lib directory to the load path.
+  require 'rvm/capistrano'                                # Load RVM's capistrano plugin.
+  require "bundler/capistrano"
+  set :rvm_ruby_string, 'ruby-1.9.2-p290@aidu'            # Whatever env you want it to run in.
+  # set :rvm_type, :user                                  # Set the user for rvm, or comment out if system install
+  
   set :repository,  "git@github.com:mojomaze/release_notes.git"
   set :domain, "lenny.sologroup.com"
   role :app, domain
@@ -69,6 +83,36 @@ task :production do
   # before "deploy:update", "deploy:reset_cache"
 end
 
+
+namespace :deploy do
+    desc "The start task is used by :cold_deploy to start the application up" 
+    task :start, :roles => :app do 
+      run "#{sudo} /bin/launchctl load -w /Library/LaunchDaemons/com.passenger_standalone.#{application}.plist" 
+    end
+    
+    desc "Restart the passenger_standalone application process"
+    task :restart, :roles => :app do
+      run "#{sudo} /bin/launchctl unload -w /Library/LaunchDaemons/com.passenger_standalone.#{application}.plist" 
+      run "#{sudo} /bin/launchctl load -w /Library/LaunchDaemons/com.passenger_standalone.#{application}.plist" 
+    end
+    
+    desc "Stop the passenger_standalone application process" 
+    task :stop, :roles => :app do 
+      run "#{sudo} /bin/launchctl unload -w /Library/LaunchDaemons/com.passenger_standalone.#{application}.plist"
+    end 
+    
+    # desc "Hook to set up database.yml on production server by copying file so passwords are not stored on server.  Brilliant"
+    # task :after_update_code, :roles => :app do 
+    #   db_config = "#{shared_path}/config/database.yml.production" 
+    #   run "cp #{db_config} #{release_path}/config/database.yml" 
+    # end 
+
+    desc "svn up the dbapi section of the database"
+    task  :dbapi do
+      run "svn up #{dbapp_root}/sites/dbapi/aidu --accept theirs-full"
+    end
+
+end
 
 
 # role :web, "your web-server here"                          # Your HTTP server, Apache/etc
