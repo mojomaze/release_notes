@@ -1,7 +1,22 @@
+# 
+#  deploy.rb
+#  release_notes
+#  $Id$
+#  
+#  Created by mcheck on 2011-09-06.
+#  Copyright 2011 Solo Group, Inc.. All rights reserved.
+# 
+
+set :user, "techserv"         # The server's user for deploys
+# set :scm_passphrase, ""     # The deploy user's password
+set :application, 'release_notes'
+
+
 desc "Echo the server's host information"
 task :uname do 
   run "uname -a"
 end
+
 
 namespace :deploy do
   desc "Delete the cached-copy folder to create a fresh checkout on next deploy"
@@ -11,47 +26,14 @@ namespace :deploy do
 end
 
 
-# miscellaneous options
-set :scm, :git
-# Or: `accurev`, `bzr`, `cvs`, `darcs`, `git`, `mercurial`, `perforce`, `subversion` or `none`
-set :deploy_via, :remote_cache
-set :branch, "master"             # For newer versions of git
-# set :branch, "origin/master"    # For older versions of git
-set :scm_verbose, true
-set :use_sudo, false
-
-# you might need to set this if you aren't seeing password prompts
-default_run_options[:pty] = true  # Must be set for the password prompt from git to work
-
-# As Capistrano executes in a non-interactive mode and therefore doesn't cause
-# any of your shell profile scripts to be run, the following might be needed
-# if (for example) you have locally installed gems or applications. Note:
-# this needs to contain the full values for the variables set, not simply
-# the deltas.
-# default_environment['PATH']='<your paths>:/usr/local/bin:/usr/bin:/bin'
-default_environment['PATH']='/opt/local/bin:/opt/local/sbin:/usr/local/mysql/bin:/opt/subversion/bin:/opt/local/apache2/bin:/usr/local/bin:/usr/local/sbin:/usr/bin:/usr/sbin:/bin:/sbin'
-# default_environment['GEM_PATH']='<your paths>:/usr/lib/ruby/gems/1.8'
-
-
-
-# be sure to change these
-set :user, 'techserv'
-set :application, 'release_notes'
-set :user, "techserv"  # The server's user for deploys
-# set :scm_passphrase, ""  # The deploy user's password
-
-set :repository,  "git@github.com:mojomaze/release_notes.git"
-ssh_options[:forward_agent] = true  # Use my private keys in order to pull from git
-
-
 desc "Local staging server code name: lenny"
 task :staging do
   # RVM bootstrap, needed since this box is running rvm.  
   $:.unshift(File.expand_path('./lib', ENV['rvm_path']))  # Add RVM's lib directory to the load path.
   require 'rvm/capistrano'                                # Load RVM's capistrano plugin.
   require "bundler/capistrano"
-  set :rvm_ruby_string, 'ruby-1.9.2-p290@aidu'             # Whatever env you want it to run in.
-  # set :rvm_type, :user                                  # Set the user for rvm, or comment out if system install
+  set :rvm_ruby_string, 'ruby-1.9.2-p290@aidu'            # Whatever env you want it to run in.
+  set :rvm_type, :user                                    # Set the user for rvm, or comment out if system install
   
   set :repository,  "git@github.com:mojomaze/release_notes.git"
   set :domain, "lenny.sologroup.com"
@@ -70,7 +52,7 @@ task :production do
   require 'rvm/capistrano'                                # Load RVM's capistrano plugin.
   require "bundler/capistrano"
   set :rvm_ruby_string, 'ruby-1.9.2-p290@aidu'            # Whatever env you want it to run in.
-  # set :rvm_type, :user                                  # Set the user for rvm, or comment out if system install
+  set :rvm_type, :user                                    # Set the user for rvm, or comment out if system install
   
   set :repository,  "git@github.com:mojomaze/release_notes.git"
   set :domain, "lenny.sologroup.com"
@@ -115,14 +97,44 @@ namespace :deploy do
 end
 
 
-# role :web, "your web-server here"                          # Your HTTP server, Apache/etc
-# role :app, "your app-server here"                          # This may be the same as your `Web` server
-# role :db,  "your primary db-server here", :primary => true # This is where Rails migrations will run
-# role :db,  "your slave db-server here"
+# you might need to set this if you aren't seeing password prompts
+default_run_options[:pty] = true  # Must be set for the password prompt from git to work
+
+# As Capistrano executes in a non-interactive mode and therefore doesn't cause
+# any of your shell profile scripts to be run, the following might be needed
+# if (for example) you have locally installed gems or applications. Note:
+# this needs to contain the full values for the variables set, not simply
+# the deltas.
+# default_environment['PATH']='<your paths>:/usr/local/bin:/usr/bin:/bin'
+default_environment['PATH']='/opt/local/bin:/opt/local/sbin:/usr/local/mysql/bin:/opt/subversion/bin:/opt/local/apache2/bin:/usr/local/bin:/usr/local/sbin:/usr/bin:/usr/sbin:/bin:/sbin'
+# default_environment['GEM_PATH']='<your paths>:/usr/lib/ruby/gems/1.8'
+
+#server options
+ssh_options[:forward_agent] = true  # Use my private keys in order to pull from git
+set :scm, :git
+# Or: `accurev`, `bzr`, `cvs`, `darcs`, `git`, `mercurial`, `perforce`, `subversion` or `none`
+set :repository,  "git@github.com:mojomaze/release_notes.git"
+set :branch, "master"             # For newer versions of git
+
+# set :deploy_to, "/home/#{user}/#{domain}"
+set :deploy_via, :remote_cache
+set :scm_verbose, true
+set :use_sudo, false
 
 
-# if you're still using the script/reaper helper you will need
-# these http://github.com/rails/irs_process_scripts
+# after "deploy:update_code", "deploy:update_shared_symlinks"
+
+# after "bundle:install", "deploy:migrate"
+
+
+# optional task to reconfigure databases
+# after "deploy:update_code" , :configure_database
+# desc "copy database.yml into the current release path"
+# task :configure_database, :roles => :app do
+#   db_config = "#{deploy_to}/config/database.yml"
+#   run "cp #{db_config} #{release_path}/config/database.yml"
+# end
+
 
 # If you are using Passenger mod_rails uncomment this:
 # namespace :deploy do
@@ -132,3 +144,4 @@ end
 #     run "#{try_sudo} touch #{File.join(current_path,'tmp','restart.txt')}"
 #   end
 # end
+
