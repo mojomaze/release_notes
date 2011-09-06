@@ -20,7 +20,7 @@ gem 'hpricot', '>= 0.6'
 
 gem 'mysql', '2.8.1'
 gem "mysql2", "< 0.3"
-
+gem 'yaml_db'
 
 gem 'authlogic'
 
