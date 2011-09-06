@@ -78,6 +78,7 @@ GEM
       treetop (~> 1.4.8)
     mime-types (1.16)
     mysql (2.8.1)
+    mysql2 (0.3.7)
     nokogiri (1.4.4)
     polyglot (0.3.1)
     rack (1.2.3)
@@ -148,6 +149,7 @@ DEPENDENCIES
   launchy
   machinist (>= 2.0.0.beta1)
   mysql (= 2.8.1)
+  mysql2 (~> 0.3.7)
   rails (= 3.0.3)
   rspec (>= 2.0.0)
   rspec-rails (>= 2.0.0)
