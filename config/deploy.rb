@@ -26,32 +26,13 @@ namespace :deploy do
 end
 
 
-desc "Local staging server code name: lenny"
-task :staging do
-  # RVM bootstrap, needed since this box is running rvm.  
-  $:.unshift(File.expand_path('./lib', ENV['rvm_path']))  # Add RVM's lib directory to the load path.
-  require 'rvm/capistrano'                                # Load RVM's capistrano plugin.
-  require "bundler/capistrano"
-  set :rvm_ruby_string, 'ruby-1.9.2-p290@aidu'            # Whatever env you want it to run in.
-  set :rvm_type, :user                                    # Set the user for rvm, or comment out if system install
-  
-  set :repository,  "git@github.com:mojomaze/release_notes.git"
-  set :domain, "lenny.sologroup.com"
-  role :app, domain
-  role :web, domain
-  role :db, domain, :primary => true
-  set :deploy_to, "/Users/Shared/SGI/#{application}"
-  set :rails_env, 'staging'
-end
-
-
 desc "The production server, code name: leonard"
 task :production do
   # RVM bootstrap, needed since this box is running rvm.  
   $:.unshift(File.expand_path('./lib', ENV['rvm_path']))  # Add RVM's lib directory to the load path.
   require 'rvm/capistrano'                                # Load RVM's capistrano plugin.
   require "bundler/capistrano"
-  set :rvm_ruby_string, 'ruby-1.9.2-p290@aidu'            # Whatever env you want it to run in.
+  set :rvm_ruby_string, 'ruby-1.9.2-p290@release_notes'            # Whatever env you want it to run in.
   set :rvm_type, :user                                    # Set the user for rvm, or comment out if system install
   
   set :repository,  "git@github.com:mojomaze/release_notes.git"
