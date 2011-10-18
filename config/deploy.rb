@@ -46,6 +46,14 @@ task :production do
   # before "deploy:update", "deploy:reset_cache"
 end
 
+namespace :rake do  
+  desc "Run a task on a remote server."  
+  # run like: cap staging rake:invoke task=a_certain_task  
+  task :invoke do  
+    run("cd #{deploy_to}/current; bundle exec /usr/bin/env rake #{ENV['task']} RAILS_ENV=#{rails_env}")  
+  end  
+end
+
 
 namespace :deploy do
     desc "The start task is used by :cold_deploy to start the application up" 
