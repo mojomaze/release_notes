@@ -89,11 +89,6 @@ namespace :deploy do
     #   run "cp #{db_config} #{release_path}/config/database.yml" 
     # end 
 
-    desc "svn up the dbapi section of the database"
-    task  :dbapi do
-      run "svn up #{dbapp_root}/sites/dbapi/aidu --accept theirs-full"
-    end
-
 end
 
 

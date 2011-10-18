@@ -19,3 +19,17 @@ class MantisProjectVersionTable < ActiveRecord::Base
   end
   
 end
+
+# == Schema Information
+#
+# Table name: mantis_project_version_table
+#
+#  id          :integer(4)      not null, primary key
+#  project_id  :integer(4)      default(0), not null
+#  version     :string(64)      default(""), not null
+#  description :text            default(""), not null
+#  released    :integer(1)      default(1), not null
+#  obsolete    :integer(1)      default(0), not null
+#  date_order  :integer(4)      default(1), not null
+#
+
