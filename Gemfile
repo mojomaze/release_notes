@@ -31,6 +31,8 @@ gem "will_paginate", "~> 3.0.pre2"
 
 gem 'annotate'
 
+gem 'activeadmin'
+
 group :development, :test do
 	gem 'sqlite3', '1.3.3'
 	gem "rspec", ">= 2.0.0" 

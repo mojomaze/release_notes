@@ -1,4 +1,8 @@
 ReleaseNotes::Application.routes.draw do |map|
+  ActiveAdmin.routes(self)
+
+  devise_for :admin_users, ActiveAdmin::Devise.config
+
   resources :users do
     collection do
       post :list_action

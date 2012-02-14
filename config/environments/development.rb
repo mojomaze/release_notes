@@ -18,4 +18,8 @@ ReleaseNotes::Application.configure do
   config.action_mailer.raise_delivery_errors = false
   
   config.active_support.deprecation = :log
+  
+  # Included from docs for active_admin
+  config.action_mailer.default_url_options = { :host => 'release_notes.dev:8888' }
+
 end
