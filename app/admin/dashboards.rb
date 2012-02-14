@@ -1,5 +1,11 @@
 ActiveAdmin::Dashboards.build do
 
+  # section "Releases" do
+  #   div do
+  #     render "releases"
+  #   end
+  # end
+
   # Define your dashboard sections here. Each block will be
   # rendered on the dashboard in the context of the view. So just
   # return the content which you would like to display.
@@ -12,6 +18,7 @@ ActiveAdmin::Dashboards.build do
   #       Post.recent(5).collect do |post|
   #         li link_to(post.title, admin_post_path(post))
   #       end
+  #
   #     end
   #   end
   
