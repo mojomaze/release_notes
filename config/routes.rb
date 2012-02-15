@@ -97,8 +97,15 @@ ReleaseNotes::Application.routes.draw do |map|
   # match ':controller(/:action(/:id(.:format)))'
 end
 #== Route Map
-# Generated on 14 Feb 2012 16:47
+# Generated on 14 Feb 2012 22:08
 #
+#             admin_releases GET        /admin/releases(.:format)          {:action=>"index", :controller=>"admin/releases"}
+#                            POST       /admin/releases(.:format)          {:action=>"create", :controller=>"admin/releases"}
+#          new_admin_release GET        /admin/releases/new(.:format)      {:action=>"new", :controller=>"admin/releases"}
+#         edit_admin_release GET        /admin/releases/:id/edit(.:format) {:action=>"edit", :controller=>"admin/releases"}
+#              admin_release GET        /admin/releases/:id(.:format)      {:action=>"show", :controller=>"admin/releases"}
+#                            PUT        /admin/releases/:id(.:format)      {:action=>"update", :controller=>"admin/releases"}
+#                            DELETE     /admin/releases/:id(.:format)      {:action=>"destroy", :controller=>"admin/releases"}
 #             admin_comments GET        /admin/comments(.:format)          {:action=>"index", :controller=>"admin/comments"}
 #                            POST       /admin/comments(.:format)          {:action=>"create", :controller=>"admin/comments"}
 #          new_admin_comment GET        /admin/comments/new(.:format)      {:action=>"new", :controller=>"admin/comments"}
