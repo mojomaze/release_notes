@@ -7,7 +7,7 @@
 #  Copyright 2011 Solo Group, Inc.. All rights reserved.
 # 
 
-set :user, "techserv"         # The server's user for deploys
+set :user, "sysadmin"         # The server's user for deploys
 # set :scm_passphrase, ""     # The deploy user's password
 set :application, 'release_notes'
 
@@ -25,26 +25,47 @@ namespace :deploy do
   end
 end
 
+# 
+# desc "The production server, code name: leonard"
+# task :production do
+#   # RVM bootstrap, needed since this box is running rvm.  
+#   $:.unshift(File.expand_path('./lib', ENV['rvm_path']))  # Add RVM's lib directory to the load path.
+#   require 'rvm/capistrano'                                # Load RVM's capistrano plugin.
+#   require "bundler/capistrano"
+#   set :rvm_ruby_string, 'ruby-1.9.2-p290@release_notes'            # Whatever env you want it to run in.
+#   set :rvm_type, :user                                    # Set the user for rvm, or comment out if system install
+#   
+#   set :repository,  "git@github.com:mojomaze/release_notes.git"
+#   set :domain, "lenny.sologroup.com"
+#   role :app, domain
+#   role :web, domain
+#   role :db, domain, :primary => true
+#   set :deploy_to, "/Users/Shared/SGI/#{application}"
+#   set :rails_env, 'production'
+#   # If we are deploying, the cache will be reset and it will always pull down a fresh copy.
+#   # before "deploy:update", "deploy:reset_cache"
+# end
 
-desc "The production server, code name: leonard"
+desc "The production server, code name: apu"
 task :production do
   # RVM bootstrap, needed since this box is running rvm.  
-  $:.unshift(File.expand_path('./lib', ENV['rvm_path']))  # Add RVM's lib directory to the load path.
+  # $:.unshift(File.expand_path('./lib', ENV['rvm_path']))  # Add RVM's lib directory to the load path.
   require 'rvm/capistrano'                                # Load RVM's capistrano plugin.
   require "bundler/capistrano"
   set :rvm_ruby_string, 'ruby-1.9.2-p290@release_notes'            # Whatever env you want it to run in.
-  set :rvm_type, :user                                    # Set the user for rvm, or comment out if system install
+  set :rvm_type, :system                                    # Set the user for rvm, or comment out if system install
   
   set :repository,  "git@github.com:mojomaze/release_notes.git"
-  set :domain, "lenny.sologroup.com"
+  set :domain, "apu.sologroup.com"
   role :app, domain
   role :web, domain
   role :db, domain, :primary => true
-  set :deploy_to, "/Users/Shared/SGI/#{application}"
+  set :deploy_to, "/opt/webapps/#{application}"
   set :rails_env, 'production'
   # If we are deploying, the cache will be reset and it will always pull down a fresh copy.
   # before "deploy:update", "deploy:reset_cache"
 end
+
 
 namespace :rake do  
   desc "Run a task on a remote server."  
